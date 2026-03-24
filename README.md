@@ -7,7 +7,7 @@ and **format** (clarity, structure, grammar) on a 1–5 scale with brief explana
 ## Setup & Run (Docker)
 
 ```bash
-make          # setup + build + run (add your API key to .env first time)
+make          # setup + build + run → tickets_evaluated.csv
 make test     # run tests inside container
 make clean    # remove output files and caches
 ```
