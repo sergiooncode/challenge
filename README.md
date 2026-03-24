@@ -42,7 +42,6 @@ make clean    # remove output files and caches
 
 ## What I'd do next with more time
 
-- OpenAI Batch API for cost-efficient processing at scale
 - Configurable scoring rubrics per client
 - Score consistency checks across runs to measure LLM evaluation reliability
   - in a quick 10-run experiment, most scores showed zero variance; only 2 out of 5 tickets had content score fluctuations (stdev < 0.52), suggesting GPT-4o is reliable for this task but warrants monitoring at scale
