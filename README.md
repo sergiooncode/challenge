@@ -4,18 +4,10 @@ Python script that evaluates AI-generated customer support replies using GPT-4o.
 For each ticket/reply pair, it scores **content** (relevance, correctness, completeness)
 and **format** (clarity, structure, grammar) on a 1–5 scale with brief explanations.
 
-## Setup
-
-Create a `.env` file in the project root:
-
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-## Run (Docker)
+## Setup & Run (Docker)
 
 ```bash
-make run      # build image and evaluate tickets → output/tickets_evaluated.csv
+make          # setup + build + run (add your API key to .env first time)
 make test     # run tests inside container
 make clean    # remove output files and caches
 ```
