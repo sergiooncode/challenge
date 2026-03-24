@@ -27,7 +27,7 @@ pytest tests/ -v
 | Variable          | Default | Description                        |
 |-------------------|---------|------------------------------------|
 | `OPENAI_API_KEY`  | —       | Required. Your OpenAI API key.     |
-| `MAX_CONCURRENCY` | `10`    | Max parallel API calls.            |
+| `MAX_CONCURRENCY` | `10`    | Max concurrent API calls.            |
 
 ## Assumptions
 
