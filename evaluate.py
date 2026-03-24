@@ -62,7 +62,9 @@ def main() -> None:
         sys.exit(1)
 
     input_path = Path("resources/tickets.csv")
-    output_path = Path("tickets_evaluated.csv")
+    output_dir = Path("output")
+    output_dir.mkdir(exist_ok=True)
+    output_path = output_dir / "tickets_evaluated.csv"
     max_concurrency = int(os.environ.get("MAX_CONCURRENCY", DEFAULT_CONCURRENCY))
 
     asyncio.run(process_csv(input_path, output_path, max_concurrency))

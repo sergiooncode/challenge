@@ -15,7 +15,7 @@ OPENAI_API_KEY=your-api-key-here
 ## Run (Docker)
 
 ```bash
-make run      # build image and evaluate tickets
+make run      # build image and evaluate tickets → output/tickets_evaluated.csv
 make test     # run tests inside container
 make clean    # remove output files and caches
 ```
@@ -45,4 +45,6 @@ make clean    # remove output files and caches
 - Configurable scoring rubrics per client
 - Score consistency checks across runs to measure LLM evaluation reliability
   - in a quick 10-run experiment, most scores showed zero variance; only 2 out of 5 tickets had content score fluctuations (stdev < 0.52), suggesting GPT-4o is reliable for this task but warrants monitoring at scale
+- Async rate limiting for high-traffic clients
+- Evaluation caching for similar ticket patterns to reduce redundant API calls
 - CI pipeline with the test suite
