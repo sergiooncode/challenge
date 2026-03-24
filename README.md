@@ -49,4 +49,3 @@ pytest tests/ -v
   - in a quick 10-run experiment, most scores showed zero variance; only 2 out of 5 tickets had content score fluctuations (stdev < 0.52), suggesting GPT-4o is reliable for this task but warrants monitoring at scale
 - Async rate limiting for high-traffic clients
 - Evaluation caching for similar ticket patterns to reduce redundant API calls
-- CI pipeline with the test suite
