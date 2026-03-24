@@ -12,6 +12,16 @@ make test     # run tests inside container
 make clean    # remove output files and caches
 ```
 
+## Run locally (without Docker)
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+echo "OPENAI_API_KEY=your-key" > .env
+python evaluate.py
+pytest tests/ -v
+```
+
 ## Configuration
 
 | Variable          | Default | Description                        |
