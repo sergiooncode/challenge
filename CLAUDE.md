@@ -36,7 +36,7 @@ resources/tickets.csv
 
 # Decisions
 
-- Python 3.13, GPT-4o, single evaluate.py script
+- Python 3.13, GPT-4o, evaluator package (schemas, client, csv_io) + evaluate.py entry point
 - Pydantic structured output via OpenAI SDK (no manual JSON parsing)
 - asyncio + semaphore for concurrent API calls (scales to large CSVs)
 - stdlib csv (no pandas), python-dotenv for env loading

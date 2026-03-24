@@ -8,7 +8,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from pydantic import ValidationError
 
-from evaluate import Evaluation, evaluate_reply, read_tickets, write_results
+from evaluator.schemas import Evaluation
+from evaluator.client import evaluate_reply
+from evaluator.csv_io import read_tickets, write_results
 
 
 # --- Evaluation model tests ---
@@ -193,20 +195,39 @@ class TestEvaluateReply:
         result = asyncio.run(evaluate_reply(client, "ticket text", "  ", semaphore))
         assert result is None
 
-    def test_api_error_returns_none_after_retries(self, semaphore):
-        from openai import APIError
+    def test_retryable_error_retries_then_fails(self, semaphore):
+        from openai import RateLimitError
 
         client = AsyncMock()
         client.responses.parse = AsyncMock(
-            side_effect=APIError(
-                message="Server error",
-                request=MagicMock(),
+            side_effect=RateLimitError(
+                message="Rate limit exceeded",
+                response=MagicMock(status_code=429, headers={}),
                 body=None,
             )
         )
 
-        with patch("evaluate.BASE_DELAY", 0.01):
+        with patch("evaluator.client.BASE_DELAY", 0.01):
             result = asyncio.run(
                 evaluate_reply(client, "ticket text", "reply text", semaphore)
             )
         assert result is None
+        assert client.responses.parse.call_count == 3  # MAX_RETRIES
+
+    def test_auth_error_fails_immediately(self, semaphore):
+        from openai import AuthenticationError
+
+        client = AsyncMock()
+        client.responses.parse = AsyncMock(
+            side_effect=AuthenticationError(
+                message="Invalid API key",
+                response=MagicMock(status_code=401, headers={}),
+                body=None,
+            )
+        )
+
+        result = asyncio.run(
+            evaluate_reply(client, "ticket text", "reply text", semaphore)
+        )
+        assert result is None
+        assert client.responses.parse.call_count == 1  # no retries

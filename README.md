@@ -12,29 +12,12 @@ Create a `.env` file in the project root:
 OPENAI_API_KEY=your-api-key-here
 ```
 
-## Run with Docker (recommended)
+## Run (Docker)
 
 ```bash
-docker build -t evaluate .
-docker run --env-file .env -v "$(pwd)":/app evaluate
-```
-
-The output file `tickets_evaluated.csv` will appear in the project directory.
-
-## Run locally
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python evaluate.py
-```
-
-## Run tests
-
-```bash
-pip install -r requirements.txt
-pytest tests/ -v
+make run      # build image and evaluate tickets
+make test     # run tests inside container
+make clean    # remove output files and caches
 ```
 
 ## Configuration
@@ -52,7 +35,14 @@ pytest tests/ -v
 
 ## Tradeoffs
 
-- **Single script over multiple modules**: keeps the solution simple and easy to review for a small, focused task
+- **Small package over monolithic script**: separates concerns (schemas, API client, CSV I/O) for readability and testability without over-abstracting
 - **Async concurrency over sequential calls**: scales to large CSVs without overcomplicating the code
 - **Structured output via Pydantic**: guarantees valid JSON and score ranges without manual parsing, at the cost of coupling to OpenAI's structured output feature
 - **stdlib csv over pandas**: fewer dependencies for a straightforward read/write task
+
+## What I'd do next with more time
+
+- OpenAI Batch API for cost-efficient processing at scale
+- Configurable scoring rubrics per client
+- Logging and observability on evaluation consistency
+- CI pipeline with the test suite
