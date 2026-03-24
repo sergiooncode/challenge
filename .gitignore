@@ -1,0 +1,9 @@
+.env
+.idea/
+__pycache__/
+*.pyc
+.venv/
+output/
+tickets_evaluated.csv
+.pytest_cache/
+.python-version
