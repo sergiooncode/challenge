@@ -12,7 +12,7 @@ resources/tickets.csv
 
 ## Deliverables
 
-- Python script (.py) or Jupyter notebook (.ipynb)
+- Python script (.py)
 - tickets_evaluated.csv with the 6 columns
 - README with setup and run instructions
 - Optional: tests with pytest
