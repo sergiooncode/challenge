@@ -9,7 +9,6 @@ and **format** (clarity, structure, grammar) on a 1–5 scale with brief explana
 ```bash
 make          # setup + build + run → tickets_evaluated.csv
 make test     # run tests inside container
-make clean    # remove output files and caches
 ```
 
 ## Run locally (without Docker)

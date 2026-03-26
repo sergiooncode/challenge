@@ -22,6 +22,3 @@ setup:
 		echo "OPENAI_API_KEY is empty in .env — add your key and re-run make"; \
 		false; \
 	fi
-
-clean:
-	rm -rf output/ __pycache__ .pytest_cache
